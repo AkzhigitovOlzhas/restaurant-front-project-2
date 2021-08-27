@@ -1,0 +1,18 @@
+.scroll-y {
+  overflow-y: scroll;
+}
+.product-modal {
+  height: 260px;
+}
+.product-img-block {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.product-modal-img {
+  max-height: 220px;
+}
+.reviews {
+  max-height: 250px;
+  overflow-y: scroll;
+}
