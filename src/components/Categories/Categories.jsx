@@ -33,7 +33,7 @@ export const Categories = () => {
         <Col lg={2} md={12}>
           <p className="fs-3">Меню</p>
           <ListGroup>
-            {data.categoriesList.map((category) => {
+            {data.map((category) => {
               return (
                 <CategoryItem
                   key={category.id}

@@ -1,7 +1,7 @@
 import { cartActionsTypes } from "./actions";
 
 const initialState = {
-  cart: {},
+  cart: [],
   countCart: 0,
 };
 

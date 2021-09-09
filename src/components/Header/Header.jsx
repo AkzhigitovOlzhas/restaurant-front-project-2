@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Badge,
   Container,
@@ -15,23 +15,30 @@ import { authActions } from "../../store/auth/actions";
 import { SignInModal, SignUpModal } from "../Modals";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { cartActions } from "../../store/cart/actions";
 
 export const Header = () => {
   const history = useHistory();
 
   const { signIn, signUp } = useSelector((state) => state.authModals);
   const { isLogged } = useSelector((state) => state.auth);
-
+  const { countCart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (localStorage.getItem("cartCount")) {
+      dispatch(cartActions.setCountCart(localStorage.getItem("cartCount")));
+    }
+  }, [dispatch]);
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="/">Суши Муши</Navbar.Brand>
+        <Navbar.Brand href="/">Company Name</Navbar.Brand>
         <div className="d-flex flex-row align-items-center">
           <Nav className="d-flex flex-row me-3 d-lg-none">
             <Nav.Link href="/cart">
-              <Badge bg="danger">0</Badge>
+              <Badge bg="danger">{countCart}</Badge>
               <FiShoppingCart className="fs-5" />
             </Nav.Link>
           </Nav>
@@ -97,7 +104,7 @@ export const Header = () => {
           <Nav className="d-none d-lg-block">
             <div className="d-flex flex-row align-items-center">
               <Nav.Link href="/cart">
-                <Badge bg="danger">20</Badge>
+                <Badge bg="danger">{countCart}</Badge>
                 <FiShoppingCart className="fs-5" />
               </Nav.Link>
 

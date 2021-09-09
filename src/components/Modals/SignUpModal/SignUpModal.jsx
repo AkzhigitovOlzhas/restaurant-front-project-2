@@ -12,7 +12,7 @@ import { useState } from "react";
 export const SignUpModal = (props) => {
   const dispatch = useDispatch();
   const [isSignUpFail, setIsSignUpFail] = useState(false);
-  const [isSignUpOk, setIsSignUpOk] = useState(true);
+  const [isSignUpOk, setIsSignUpOk] = useState(false);
   const { mutateAsync, isLoading } = useMutation(signUp);
 
   const onFormSubmit = async (data) => {

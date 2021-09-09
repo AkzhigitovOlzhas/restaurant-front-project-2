@@ -1,6 +1,14 @@
 import React from "react";
+import { useQuery } from "react-query";
+import { getCrossSells } from "../../api";
 
-export const OtherIngredients = ({ data, handleSetIngredients }) => {
+export const OtherIngredients = ({ defaultValues, handleSetIngredients }) => {
+  const { data, isLoading } = useQuery("cross_sells", getCrossSells);
+
+  if (isLoading) {
+    return null;
+  }
+
   return (
     <div className="mt-2">
       {data.length === 0 ? (

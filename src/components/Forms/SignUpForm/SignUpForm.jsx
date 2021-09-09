@@ -207,9 +207,8 @@ export const SignUpForm = ({
                   setIsSignUpOk(false);
                 }}
               >
-                войти
-              </span>
-              .
+                войти.
+              </span> 
             </Alert>
           )}
           <button

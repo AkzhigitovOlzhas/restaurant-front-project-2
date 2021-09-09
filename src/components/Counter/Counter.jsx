@@ -1,21 +1,23 @@
 import React from "react";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 
-export const Counter = ({ changeNum, state }) => {
+export const Counter = ({ setPrice, count, setCount }) => {
   return (
     <div className="d-flex align-items-center  user-select-none ms-1">
       <div
         onClick={() => {
-          changeNum(state + 1);
+          setCount(count + 1);
+          setPrice(true);
         }}
       >
         <AiOutlinePlusCircle className="fs-4" />
       </div>
-      <div className="fs-4 mx-1">{state}</div>
+      <div className="fs-4 mx-1">{count}</div>
       <div
         onClick={() => {
-          if (state - 1 !== 0) {
-            changeNum(state - 1);
+          if (count - 1 !== 0) {
+            setCount(count - 1);
+            setPrice(false);
           }
         }}
       >

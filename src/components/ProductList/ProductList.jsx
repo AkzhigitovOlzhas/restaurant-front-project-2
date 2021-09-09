@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getAllCards } from "../../api/api";
 import { ProductCard } from "./ProductCard";
 import { useQuery } from "react-query";
+import { ToastContainer, Zoom } from "react-toastify";
 
 export const ProductList = () => {
   const { category } = useParams();
@@ -19,7 +20,19 @@ export const ProductList = () => {
   }
   return (
     <>
-      <p className="fs-3 mb-2">{data.name}</p> 
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        transition={Zoom}
+      />
+      <p className="fs-3 mb-2">{data.name}</p>{" "}
       <Row>
         {data.products.map((item) => {
           return <ProductCard key={item.id} data={item} />;

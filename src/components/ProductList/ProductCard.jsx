@@ -15,14 +15,21 @@ export const ProductCard = ({ data }) => {
         xs={12}
         className="d-flex justify-content-center p-2"
       >
-        <div className="shadow  rounded d-flex flex-column align-items-center w-100 p-2 bg-white justify-content-between">
-          <div>
+        <div className="shadow  rounded d-flex flex-column align-items-center w-100  bg-white justify-content-between">
+          <div style={{ width: "100%" }}>
             <img
-              src="https://dodopizza-a.akamaihd.net/static/Img/Products/6a089c6e87f2431a99cdfc9fa82bdbf0_292x292.jpeg"
+              src={`http://willdimr.beget.tech/restaurant1/storage/app/${data.image}`}
               alt=""
-              style={{ maxWidth: "100%" }}
+              style={{
+                maxWidth: "100%",
+                width: "100%",
+                maxHeight: "220px",
+              }}
             />
-            <div className="d-flex justify-content-between align-items-center w-100 px-1">
+          </div>
+
+          <div className="p-2" style={{ width: "100%" }}>
+            <div className="d-flex p-2 justify-content-between align-items-center w-100">
               <div className="fs-5">{data.name}</div>
               <OverlayTrigger
                 key="bottom"
@@ -34,8 +41,6 @@ export const ProductCard = ({ data }) => {
                 </div>
               </OverlayTrigger>
             </div>
-          </div>
-          <div style={{ width: "100%" }}>
             <div className="w-100 d-flex justify-content-between align-items-center my-1 mb-2 px-1">
               <div>
                 {data.old_price ? (

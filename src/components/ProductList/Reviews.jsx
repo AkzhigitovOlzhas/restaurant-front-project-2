@@ -1,23 +1,27 @@
 import React from "react";
-import { Col, Form, Row, Button } from "react-bootstrap";
+import { useMutation, useQueryClient } from "react-query";
+import { addReview } from "../../api";
+import { ReviewForm } from "../ReviewForm";
 import { ReviewsList } from "./ReviewsList";
 import "./style.css";
 
-export const Reviews = ({ className, data }) => {
+export const Reviews = ({ className, data, id_product }) => {
+  const queryClient = useQueryClient();
+  const { mutateAsync, isLoading } = useMutation(addReview);
+
+  const onFormSubmit = async (data) => {
+    await mutateAsync(data);
+    queryClient.invalidateQueries("products");
+  };
+
   return (
     <div className={className}>
       <div className="reviews">
-        <Row style={{ maxWidth: "100%" }}>
-          <Col lg={12}>
-            <Form.Floating>
-              <Form.Control type="text" placeholder="otzyv" />
-              <label>Ваш отзыв</label>
-            </Form.Floating>
-          </Col>
-          <Col className="mt-1">
-            <Button>Отправить</Button>
-          </Col>
-        </Row>
+        <ReviewForm
+          onFormSubmit={onFormSubmit}
+          isLoading={isLoading}
+          id_product={id_product}
+        />
         <ReviewsList data={data} />
       </div>
     </div>

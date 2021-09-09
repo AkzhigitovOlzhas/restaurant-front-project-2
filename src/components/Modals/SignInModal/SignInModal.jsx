@@ -8,11 +8,8 @@ import { useDispatch } from "react-redux";
 import { useMutation } from "react-query";
 import { signIn } from "../../../api";
 import { SignInForm } from "../../Forms";
-import { useHistory } from "react-router-dom";
 
 export const SignInModal = (props) => {
-  const history = useHistory();
-
   const dispatch = useDispatch();
   const { mutateAsync, isLoading } = useMutation(signIn);
   const [isAuthFail, setIsAuthFail] = useState(false);
@@ -27,9 +24,9 @@ export const SignInModal = (props) => {
       dispatch(authActions.setIsLogged(true));
       dispatch(authActions.setUserData(response.user));
       dispatch(authModalActions.setShowSignInModal(false));
-      history.push("/user");
       localStorage.setItem("token", response.access_token);
       localStorage.setItem("user", JSON.stringify(response.user));
+      window.location.href = "/user";
     }
   };
 
