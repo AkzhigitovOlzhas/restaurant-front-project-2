@@ -3,8 +3,8 @@ import { ReviewList } from "../Lists";
 
 export const Reviews = () => {
   return (
-    <div className="p-2">
-      <div className="fs-2">Отзывы</div>
+    <div>
+      <div className="fs-3 mb-3">Отзывы</div>
       <ReviewList />
     </div>
   );

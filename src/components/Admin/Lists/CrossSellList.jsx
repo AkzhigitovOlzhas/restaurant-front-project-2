@@ -1,4 +1,5 @@
 import React from "react";
+import Loader from "react-loader-spinner";
 import { useQuery } from "react-query";
 import { getAllCrossSellsAdmin } from "../../../api";
 import { CrossSellCard } from "../Cards";
@@ -10,7 +11,11 @@ export const CrossSellList = () => {
   );
 
   if (isLoading) {
-    return null;
+    return (
+      <div className="w-100 d-flex justify-content-center">
+        <Loader type="Bars" color="black" height={80} width={80} />
+      </div>
+    );
   }
 
   return (

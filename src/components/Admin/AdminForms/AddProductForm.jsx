@@ -1,55 +1,112 @@
-import React from "react";
+import React, { useState } from "react";
 import { Alert, Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
 import { useQuery } from "react-query";
-import { getAllCategories } from "../../../api";
+import { getAllCategoriesAdmin } from "../../../api";
 import { Formik } from "formik";
 import Loader from "react-loader-spinner";
+import { useRef } from "react";
 
 export const AddProductForm = ({
   onFormSubmit,
   isNotError,
   isLoadingSubmit,
-  defaultValues,
+  initVal,
 }) => {
-  const { data, isLoading } = useQuery("categories", getAllCategories);
+  const { data, isLoading } = useQuery(
+    "categoriesAdmin",
+    getAllCategoriesAdmin
+  );
+  const [file, setFile] = useState(null);
+  const inputRef = useRef();
+
+  function init() {
+    let values = {
+      name: "",
+      description: "",
+      category_id: 0,
+      image: "void",
+      price: "",
+      old_price: "",
+      ingridients: "",
+      having: null,
+      weight: "",
+      is_hit: 0,
+      info: "",
+    };
+
+    if (data.length !== 0) {
+      values = { ...values, category_id: data[0].id };
+    }
+
+    if (initVal) {
+      values = { ...initVal, category_id: initVal.category.id };
+      delete values.category;
+    }
+
+    return values;
+  }
+
   function validate(values) {
     const errors = {};
     if (!values.name) {
       errors.name = "Введите название";
     }
-    if (!values.name) {
-      errors.name = "Введите название";
+    if (!values.description) {
+      errors.description = "Введите описание товара";
     }
-    if (!values.name) {
-      errors.name = "Введите название";
+    if (!values.info) {
+      errors.info = "Введите краткую информацию о товаре";
     }
+    if (!values.price) {
+      errors.price = "Введите цену товара";
+    }
+    if (!values.old_price) {
+      errors.old_price = "Введите старую цену";
+    }
+    if (!values.ingridients) {
+      errors.ingridients = "Введите список ингридиентов";
+    }
+    if (!values.weight) {
+      errors.weight = "Введите вес";
+    }
+
     return errors;
+  }
+
+  if (isLoading) {
+    return null;
   }
 
   return (
     <Formik
-      initialValues={{
-        name: "",
-        description: "",
-        category_id: 1,
-        image: "",
-        price: "",
-        old_price: "",
-        ingridients: "",
-        having: 20,
-        weight: "",
-        is_hit: 0,
-        info: "",
-      }}
+      initialValues={init()}
       validate={validate}
       onSubmit={(values, { setSubmitting }) => {
+        let formData = new FormData();
+        let entries = Object.entries(values).filter(
+          (entry) => entry[0] !== "image"
+        );
+
+        entries.forEach((entry) => {
+          formData.append(entry[0], entry[1]);
+        });
+        
+        formData.append("image", file);
         console.log(values);
-        onFormSubmit(values);
+        onFormSubmit(formData);
         setSubmitting(false);
       }}
     >
-      {({ errors, handleChange, handleSubmit, isSubmitting }) => (
-        <Form onSubmit={handleSubmit} className="p-2">
+      {({
+        errors,
+        touched,
+        values,
+        handleChange,
+        handleSubmit,
+        isSubmitting,
+      }) => (
+        <Form onSubmit={handleSubmit} className="p-2 bg-white">
+          <div className="fs-3 mb-2">Добавить товар</div>
           <Row>
             <Col sm={6} xs={12} className="mb-3">
               <Form.Floating>
@@ -57,10 +114,11 @@ export const AddProductForm = ({
                   name="name"
                   type="text"
                   onChange={handleChange}
-                  placeholder=""
+                  placeholder="name"
+                  value={values.name}
                 />
                 <label>
-                  {errors.name ? (
+                  {errors.name && touched.name ? (
                     <span className="text-danger">{errors.name}</span>
                   ) : (
                     "Введите название"
@@ -73,17 +131,18 @@ export const AddProductForm = ({
                 controlId="floatingSelect"
                 label="Выберете категорию"
               >
-                <Form.Select name="category_id" onChange={handleChange}>
-                  {!isLoading
-                    ? data.filter((item) => item.id !== 0)
-                        .map((item) => {
-                          return (
-                            <option key={item.id} value={item.id}>
-                              {item.name}
-                            </option>
-                          );
-                        })
-                    : null}
+                <Form.Select
+                  name="category_id"
+                  onChange={handleChange}
+                  value={values.category_id}
+                >
+                  {data.map((item) => {
+                    return (
+                      <option key={item.id} value={item.id}>
+                        {item.name}
+                      </option>
+                    );
+                  })}
                 </Form.Select>
               </FloatingLabel>
             </Col>
@@ -93,10 +152,11 @@ export const AddProductForm = ({
               name="description"
               type="text"
               onChange={handleChange}
-              placeholder=""
+              placeholder="description"
+              value={values.description}
             />
             <label>
-              {errors.description ? (
+              {errors.description && touched.description ? (
                 <span className="text-danger">{errors.description}</span>
               ) : (
                 "Краткое описание товара"
@@ -108,10 +168,11 @@ export const AddProductForm = ({
               name="info"
               type="text"
               onChange={handleChange}
-              placeholder=""
+              placeholder="info"
+              value={values.info}
             />
             <label>
-              {errors.info ? (
+              {errors.info && touched.info ? (
                 <span className="text-danger">{errors.info}</span>
               ) : (
                 "Информация о товаре"
@@ -123,17 +184,19 @@ export const AddProductForm = ({
               <Form.Group controlId="formFile">
                 <Form.Label>Загрузите изображение товара</Form.Label>
                 <Form.Control
+                  required={values.image === "void"}
                   type="file"
                   name="image"
                   accept=".png, .jpg"
-                  onChange={handleChange}
+                  ref={inputRef}
+                  onChange={() => setFile(inputRef.current.files[0])}
                 />
               </Form.Group>
             </Col>
             <Col sm={5} xs={12} className="mb-3">
               <div>
                 <Form.Check
-                  defaultChecked
+                  defaultChecked={values.is_hit === 0}
                   type="radio"
                   name="is_hit"
                   value={0}
@@ -141,6 +204,7 @@ export const AddProductForm = ({
                   label="Не добавлять в популярное"
                 />
                 <Form.Check
+                  defaultChecked={values.is_hit === 1}
                   type="radio"
                   name="is_hit"
                   value={1}
@@ -157,10 +221,11 @@ export const AddProductForm = ({
                   name="price"
                   type="number"
                   onChange={handleChange}
-                  placeholder=""
+                  placeholder="price"
+                  value={values.price}
                 />
                 <label>
-                  {errors.price ? (
+                  {errors.price && touched.price ? (
                     <span className="text-danger">{errors.price}</span>
                   ) : (
                     "Введите цену товара"
@@ -174,10 +239,11 @@ export const AddProductForm = ({
                   name="old_price"
                   type="number"
                   onChange={handleChange}
-                  placeholder=""
+                  placeholder="old_price"
+                  value={values.old_price}
                 />
                 <label>
-                  {errors.old_price ? (
+                  {errors.old_price && touched.old_price ? (
                     <span className="text-danger">{errors.old_price}</span>
                   ) : (
                     "Старая цена (не обязательно)"
@@ -193,10 +259,11 @@ export const AddProductForm = ({
                   name="ingridients"
                   type="text"
                   onChange={handleChange}
-                  placeholder=""
+                  placeholder="ingridients"
+                  value={values.ingridients}
                 />
                 <label>
-                  {errors.ingridients ? (
+                  {errors.ingridients && touched.ingridients ? (
                     <span className="text-danger">{errors.ingridients}</span>
                   ) : (
                     "Ведите список ингридиентов"
@@ -210,10 +277,11 @@ export const AddProductForm = ({
                   name="weight"
                   type="text"
                   onChange={handleChange}
-                  placeholder=""
+                  placeholder="weight"
+                  value={values.weight}
                 />
                 <label>
-                  {errors.weight ? (
+                  {errors.weight && touched.weight ? (
                     <span className="text-danger">{errors.weight}</span>
                   ) : (
                     "Ведите вес или кол-во (100гр/12шт)"

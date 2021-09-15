@@ -23,7 +23,7 @@ export const SignInForm = ({ onFormSubmit, isLoading, isAuthFail }) => {
         setSubmitting(false);
       }}
     >
-      {({ errors, handleChange, handleSubmit, isSubmitting }) => (
+      {({ errors, touched, handleChange, handleSubmit, isSubmitting }) => (
         <Form onSubmit={handleSubmit}>
           <Form.Floating className="mb-3">
             <Form.Control
@@ -33,7 +33,7 @@ export const SignInForm = ({ onFormSubmit, isLoading, isAuthFail }) => {
               placeholder="name@example.com"
             />
             <label>
-              {errors.email ? (
+              {errors.email && touched.email ? (
                 <span className="text-danger">{errors.email}</span>
               ) : (
                 "Введите эл.почту"

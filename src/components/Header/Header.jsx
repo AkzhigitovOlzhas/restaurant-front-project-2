@@ -32,7 +32,7 @@ export const Header = () => {
   }, [dispatch]);
 
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" id="up">
       <Container>
         <Navbar.Brand href="/">Company Name</Navbar.Brand>
         <div className="d-flex flex-row align-items-center">
@@ -47,9 +47,6 @@ export const Header = () => {
 
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto  my-1">
-            <Nav.Link className="ms-3" href="/">
-              Главная
-            </Nav.Link>
             <Nav.Link className="ms-3" href="/menu/0">
               Меню
             </Nav.Link>

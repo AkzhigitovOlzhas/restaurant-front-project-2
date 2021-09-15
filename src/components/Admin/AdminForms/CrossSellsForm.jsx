@@ -6,7 +6,6 @@ import Loader from "react-loader-spinner";
 export const CrossSellsForm = ({ onFormSubmit, isNotError, isLoading }) => {
   return (
     <>
-      <div className="fs-3 ms-2">Добавить доп. продажи</div>
       <Formik
         initialValues={{
           name: "",
@@ -29,7 +28,8 @@ export const CrossSellsForm = ({ onFormSubmit, isNotError, isLoading }) => {
         }}
       >
         {({ errors, handleChange, handleSubmit }) => (
-          <Form onSubmit={handleSubmit} className="p-2">
+          <Form onSubmit={handleSubmit} className="p-2 bg-white my-4">
+            <div className="fs-3 mb-2">Добавить доп. продажи</div>
             <Row>
               <Col>
                 <Form.Floating>

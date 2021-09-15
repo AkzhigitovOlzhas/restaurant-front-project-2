@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { getCrossSells } from "../../api";
 
-export const OtherIngredients = ({ defaultValues, handleSetIngredients }) => {
+export const OtherIngredients = ({ handleSetIngredients }) => {
   const { data, isLoading } = useQuery("cross_sells", getCrossSells);
 
   if (isLoading) {
@@ -26,7 +26,7 @@ export const OtherIngredients = ({ defaultValues, handleSetIngredients }) => {
                       type="checkbox"
                       value={item.name}
                       onChange={(event) =>
-                        handleSetIngredients(event, item.price)
+                        handleSetIngredients(event, item.id, item.price)
                       }
                     />
                     <div className="ms-2">{item.name}</div>

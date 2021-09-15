@@ -3,8 +3,8 @@ import { CategoryList } from "../Lists";
 
 export const CategoryEditor = () => {
   return (
-    <div className="my-3">
-      <div className="fs-3">Категории</div>
+    <div>
+      <div className="fs-3 mb-3">Категории</div>
       <CategoryList />
     </div>
   );

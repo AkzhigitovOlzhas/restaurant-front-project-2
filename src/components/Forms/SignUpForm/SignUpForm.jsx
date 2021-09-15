@@ -66,7 +66,7 @@ export const SignUpForm = ({
         setSubmitting(false);
       }}
     >
-      {({ errors, handleChange, handleSubmit, isSubmitting }) => (
+      {({ errors, touched, handleChange, handleSubmit, isSubmitting }) => (
         <form onSubmit={handleSubmit}>
           <Row>
             <Col>
@@ -78,7 +78,7 @@ export const SignUpForm = ({
                   placeholder="name"
                 />
                 <label>
-                  {errors.name ? (
+                  {errors.name && touched.name ? (
                     <span className="text-danger">{errors.name}</span>
                   ) : (
                     "Имя"
@@ -95,7 +95,7 @@ export const SignUpForm = ({
                   placeholder="surname"
                 />
                 <label>
-                  {errors.surname ? (
+                  {errors.surname && touched.surname ? (
                     <span className="text-danger">{errors.surname}</span>
                   ) : (
                     "Фамилия"
@@ -112,7 +112,7 @@ export const SignUpForm = ({
               placeholder="email"
             />
             <label>
-              {errors.email ? (
+              {errors.email && touched.email ? (
                 <span className="text-danger">{errors.email}</span>
               ) : (
                 "Введите эл.почту"
@@ -127,7 +127,7 @@ export const SignUpForm = ({
               placeholder="phone"
             />
             <label>
-              {errors.phone ? (
+              {errors.phone && touched.phone ? (
                 <span className="text-danger">{errors.phone}</span>
               ) : (
                 "Введите номер телефона"
@@ -137,7 +137,7 @@ export const SignUpForm = ({
           <Row>
             <Col>
               <Form.Label className="d-block d-sm-none fs-7">
-                {errors.password ? (
+                {errors.password && touched.password ? (
                   <span className="text-danger">{errors.password}</span>
                 ) : (
                   "Введите пароль"
@@ -152,7 +152,7 @@ export const SignUpForm = ({
                   className="py-2 pt-sm-4 h-75"
                 />
                 <label className="d-none d-sm-block">
-                  {errors.password ? (
+                  {errors.password && touched.password ? (
                     <span className="text-danger">{errors.password}</span>
                   ) : (
                     "Введите пароль"
@@ -162,7 +162,8 @@ export const SignUpForm = ({
             </Col>
             <Col>
               <Form.Label className="d-block d-sm-none fs-7">
-                {errors.password_confirmation ? (
+                {errors.password_confirmation &&
+                touched.password_confirmation ? (
                   <span className="text-danger">
                     {errors.password_confirmation}
                   </span>
@@ -179,7 +180,7 @@ export const SignUpForm = ({
                   className="py-2 pt-sm-4 h-75"
                 />
                 <label className="d-none d-sm-block">
-                  {errors.password_confirmation ? (
+                  {errors.password_confirmation && touched.password ? (
                     <span className="text-danger">
                       {errors.password_confirmation}
                     </span>
@@ -208,7 +209,7 @@ export const SignUpForm = ({
                 }}
               >
                 войти.
-              </span> 
+              </span>
             </Alert>
           )}
           <button

@@ -17,7 +17,8 @@ export const ProductList = () => {
         <Spinner animation="border" style={{ width: "5rem", height: "5rem" }} />
       </Row>
     );
-  }
+  } 
+  
   return (
     <>
       <ToastContainer

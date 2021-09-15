@@ -13,18 +13,16 @@ export const ProductCard = ({ data, id }) => {
       lg={3}
       md={4}
       xs={6}
-      className="d-flex justify-content-center p-2 "
+      className="d-flex justify-content-center p-2"
     >
       <div className="shadow  rounded d-flex flex-column align-items-center w-100 p-2 bg-white justify-content-between">
-        <div>
-          <img
-            src={`http://willdimr.beget.tech/restaurant1/storage/app/${data.image}`}
-            alt=""
-            style={{ maxWidth: "100%" }}
-          />
-          <div>{data.name}</div>
-        </div>
+        <img
+          src={`http://willdimr.beget.tech/restaurant1/storage/app/${data.image}`}
+          alt=""
+          style={{ maxWidth: "100%" }}
+        />
         <div style={{ width: "100%", marginTop: "5px" }}>
+          <div className="mb-2">{data.name}</div>
           <Button
             variant="warning"
             style={{ width: "100%", marginBottom: "7px" }}

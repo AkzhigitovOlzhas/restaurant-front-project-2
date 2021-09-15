@@ -14,8 +14,9 @@ export const AddProductTab = () => {
       setIsNotError(false);
     } else {
       setIsNotError(true);
-    } 
+    }
   };
+
   return (
     <div>
       <AddProductForm

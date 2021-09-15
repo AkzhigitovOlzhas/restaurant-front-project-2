@@ -43,10 +43,10 @@ export const ProductModal = ({ show, onHide, id }) => {
     }
   }, [isLoading, data]);
 
-  function handleSetIngredients(event, currentPrice) {
+  function handleSetIngredients(event, id, currentPrice) {
     let newIngredients = ingredients;
     if (event.target.checked) {
-      newIngredients.push({ name: event.target.value, currentPrice });
+      newIngredients.push({ id, name: event.target.value, currentPrice });
       setNewPrice(newPrice + currentPrice);
     } else {
       newIngredients = newIngredients.filter(
@@ -87,7 +87,12 @@ export const ProductModal = ({ show, onHide, id }) => {
     });
 
     let product = {
-      data,
+      data: {
+        id: data.id,
+        name: data.name,
+        price: data.price,
+        image: data.image,
+      },
       count,
       total_price: newPrice,
       cross_sells: ingredients,

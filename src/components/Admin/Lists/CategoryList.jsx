@@ -9,15 +9,24 @@ export const CategoryList = () => {
     "categoriesAdmin",
     getAllCategoriesAdmin
   );
-  if (isLoading) {
-    return <Loader />;
+
+   if (isLoading) {
+    return (
+      <div className="w-100 d-flex justify-content-center">
+        <Loader type="Bars" color="black" height={80} width={80} />
+      </div>
+    );
   }
 
   return (
     <div>
-      {data.map((item) => (
-        <CategoryCard key={item.id} id={item.id} name={item.name} />
-      ))}
+      {data.length === 0 ? (
+        <div className="fs-4">Пока что нет ни одной категории.</div>
+      ) : (
+        data.map((item) => (
+          <CategoryCard key={item.id} id={item.id} name={item.name} />
+        ))
+      )}
     </div>
   );
 };

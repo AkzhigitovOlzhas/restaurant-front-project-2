@@ -1,0 +1,50 @@
+.step {
+  list-style: none;
+  margin: 0;
+}
+
+.step-element {
+  display: flex;
+  padding: 1rem 0;
+}
+
+.step-number {
+  position: relative;
+  width:6rem;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.step-number .number {
+  color: #bfc5ca;
+  background-color: #eaeff4;
+  font-size: 2rem;
+}
+
+.step-number .number {
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+}
+
+.number {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  border-radius: 10rem;
+}
+
+.step-number::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 48px;
+  bottom: -2rem;
+  margin-left: -1px;
+  border-left: 3px dashed #eaeff4;
+}
+
+.step .step-element:last-child .step-number::before {
+  bottom: 1rem;
+}

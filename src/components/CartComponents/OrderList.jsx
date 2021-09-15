@@ -31,6 +31,14 @@ export const OrderList = () => {
     });
   }
 
+  function getTotal() {
+    let total = cart.reduce((acc, item) => {
+      return +acc + +item.total_price;
+    }, 0);
+    localStorage.setItem("total", total);
+    return total;
+  }
+
   return (
     <Container>
       <ToastContainer
@@ -54,15 +62,11 @@ export const OrderList = () => {
                 <OrderItem key={JSON.stringify(order)} order={order} />
               ))}
               <div className="p-4 d-flex justify-content-between  flex-column flex-sm-row align-items-sm-center">
-                <div className="fs-4 text-danger">
-                  Итого:{" "}
-                  {cart.reduce((acc, item) => {
-                    return +acc + +item.total_price;
-                  }, 0)}{" "}
-                  руб.
-                </div>
+                <div className="fs-4 text-danger">Итого: {getTotal()} руб.</div>
                 <div className="mt-3 mt-sm-0">
-                  <Button variant="success" className="ms-2">Оформить заказ</Button>
+                  <Button variant="success" className="ms-2" href="/order">
+                    Оформить заказ
+                  </Button>
                   <Button
                     variant="danger"
                     className="ms-2"
