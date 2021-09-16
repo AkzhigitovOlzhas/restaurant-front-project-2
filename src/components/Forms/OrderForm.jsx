@@ -2,8 +2,14 @@ import { Formik } from "formik";
 import React from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Loader from "react-loader-spinner";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { cartActions } from "../../store/cart/actions";
 
 export const OrderForm = ({ onFormSubmit, isLoading }) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   function init() {
     let userData = JSON.parse(localStorage.getItem("user"));
     let initValues = {
@@ -39,7 +45,6 @@ export const OrderForm = ({ onFormSubmit, isLoading }) => {
       }
 
       let products = JSON.parse(localStorage.getItem("cart"));
-      console.log(products);
       products = products.map((product) => {
         let orderCross = product.cross_sells.map((cross_sell) => {
           return {
@@ -90,8 +95,13 @@ export const OrderForm = ({ onFormSubmit, isLoading }) => {
       onSubmit={(values, { setSubmitting }) => {
         let order = createOrder(values);
 
-        console.log(order);
         onFormSubmit(order);
+        dispatch(cartActions.setCart([]));
+        dispatch(cartActions.setCountCart(0));
+        localStorage.removeItem("cart");
+        localStorage.removeItem("total");
+        localStorage.removeItem("cartCount");
+        history.push("/");
         setSubmitting(false);
       }}
     >

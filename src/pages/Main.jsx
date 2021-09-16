@@ -73,45 +73,45 @@ export const Main = () => {
                 <div className="display-3">Как сделать заказ?</div>
               </Col>
               <Col>
-                <div class="mb-4">
-                  <ol class="step pl-0">
-                    <li class="step-element pb-0">
-                      <div class="step-number">
-                        <span class="number">1</span>
+                <div className="mb-4">
+                  <ol className="step pl-0">
+                    <li className="step-element pb-0">
+                      <div className="step-number">
+                        <span className="number">1</span>
                       </div>
-                      <div class="step-excerpt">
-                        <h6 class="font-weight-bold dark-grey-text mb-3">
+                      <div className="step-excerpt">
+                        <h6 className="font-weight-bold dark-grey-text mb-3">
                           Write your requirements
                         </h6>
-                        <p class="text-muted">
+                        <p className="text-muted">
                           Think the or organization same proposal to affected
                           heard reclined in be it reassuring.
                         </p>
                       </div>
                     </li>
-                    <li class="step-element pb-0">
-                      <div class="step-number">
-                        <span class="number">2</span>
+                    <li className="step-element pb-0">
+                      <div className="step-number">
+                        <span className="number">2</span>
                       </div>
-                      <div class="step-excerpt">
-                        <h6 class="font-weight-bold dark-grey-text mb-3">
+                      <div className="step-excerpt">
+                        <h6 className="font-weight-bold dark-grey-text mb-3">
                           Sign the contract
                         </h6>
-                        <p class="text-muted">
+                        <p className="text-muted">
                           Think the or organization same proposal to affected
                           heard reclined in be it reassuring.
                         </p>
                       </div>
                     </li>
-                    <li class="step-element pb-0">
-                      <div class="step-number">
-                        <span class="number">3</span>
+                    <li className="step-element pb-0">
+                      <div className="step-number">
+                        <span className="number">3</span>
                       </div>
-                      <div class="step-excerpt">
-                        <h6 class="font-weight-bold dark-grey-text mb-3">
+                      <div className="step-excerpt">
+                        <h6 className="font-weight-bold dark-grey-text mb-3">
                           We start developing
                         </h6>
-                        <p class="text-muted">
+                        <p className="text-muted">
                           Think the or organization same proposal to affected
                           heard reclined in be it reassuring.
                         </p>
@@ -198,7 +198,7 @@ export const Main = () => {
                 <div>
                   <a
                     href="/contacts"
-                    class="text-decoration-none me-sm-3 p-2 px-3 bg-white text-dark fw-bold"
+                    className="text-decoration-none me-sm-3 p-2 px-3 bg-white text-dark fw-bold"
                     style={{ borderRadius: "20px" }}
                   >
                     Контакты
@@ -207,7 +207,7 @@ export const Main = () => {
                 <div className="mt-sm-0 mt-3">
                   <a
                     href="tel:+996709999999"
-                    class="text-decoration-none ms-sm-3 text-white fw-bold"
+                    className="text-decoration-none ms-sm-3 text-white fw-bold"
                   >
                     0709 999 999
                   </a>

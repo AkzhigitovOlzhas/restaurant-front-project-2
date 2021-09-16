@@ -16,6 +16,7 @@ import { SignInModal, SignUpModal } from "../Modals";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { cartActions } from "../../store/cart/actions";
+import { ToastContainer, Zoom } from "react-toastify";
 
 export const Header = () => {
   const history = useHistory();
@@ -33,6 +34,18 @@ export const Header = () => {
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" id="up">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        transition={Zoom}
+      />
       <Container>
         <Navbar.Brand href="/">Company Name</Navbar.Brand>
         <div className="d-flex flex-row align-items-center">
