@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import Loader from "react-loader-spinner";
 import { useMutation, useQueryClient } from "react-query";
+import { toast } from "react-toastify";
 import { removeClosedOrder } from "../../../api";
 import { OrderCard } from "./OrderCard";
 
@@ -12,6 +13,15 @@ export const ClosedOrderCard = ({ order }) => {
   const remove = async () => {
     await mutateAsync(order.id);
     queryClient.invalidateQueries("closedOrders");
+    toast.info("Заказ успешно удален", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   return (

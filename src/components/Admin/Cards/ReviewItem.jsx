@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import Loader from "react-loader-spinner";
 import { useMutation, useQueryClient } from "react-query";
+import { toast } from "react-toastify";
 import { removeReview } from "../../../api";
 
 export const ReviewItem = ({ id, author, text, product }) => {
@@ -11,6 +12,15 @@ export const ReviewItem = ({ id, author, text, product }) => {
   const remove = async () => {
     await mutateAsync(id);
     queryClient.invalidateQueries("reviewsAdmin");
+    toast.info("Отзыв удален", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   return (

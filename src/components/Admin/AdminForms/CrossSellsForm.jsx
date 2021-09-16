@@ -1,9 +1,9 @@
 import React from "react";
 import { Formik } from "formik";
-import { Alert, Button, Col, Form, Row } from "react-bootstrap";
-import Loader from "react-loader-spinner";
+import { Button, Col, Form, Row } from "react-bootstrap";
+import Loader from "react-loader-spinner"; 
 
-export const CrossSellsForm = ({ onFormSubmit, isNotError, isLoading }) => {
+export const CrossSellsForm = ({ onFormSubmit, isLoading }) => {
   return (
     <>
       <Formik
@@ -22,14 +22,12 @@ export const CrossSellsForm = ({ onFormSubmit, isNotError, isLoading }) => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
           onFormSubmit(values);
           setSubmitting(false);
         }}
       >
         {({ errors, handleChange, handleSubmit }) => (
-          <Form onSubmit={handleSubmit} className="p-2 bg-white my-4">
-            <div className="fs-3 mb-2">Добавить доп. продажи</div>
+          <Form onSubmit={handleSubmit} className="p-2 bg-white">
             <Row>
               <Col>
                 <Form.Floating>
@@ -73,11 +71,6 @@ export const CrossSellsForm = ({ onFormSubmit, isNotError, isLoading }) => {
                 "Отправить"
               )}
             </Button>
-            {isNotError ? (
-              <Alert variant="success" className="mt-2 mb-0">
-                Продукт успешно добавлен
-              </Alert>
-            ) : null}
           </Form>
         )}
       </Formik>

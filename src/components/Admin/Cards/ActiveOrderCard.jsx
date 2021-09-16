@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import Loader from "react-loader-spinner";
 import { useMutation, useQueryClient } from "react-query";
+import { toast } from "react-toastify";
 import { closeOrder } from "../../../api";
 import { OrderCard } from "./OrderCard";
 
@@ -11,6 +12,15 @@ export const ActiveOrderCard = ({ order }) => {
   const close = async () => {
     await mutateAsync({ id: order.id });
     queryClient.invalidateQueries("activeOrders");
+    toast.info("Заказ успешно закрыт", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   return (

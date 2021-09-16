@@ -462,6 +462,26 @@ export const closeOrder = async ({ id }) => {
   return response.json();
 };
 
+export const editCategoty = async ({ id, data }) => {
+  const response = await fetch(
+    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/categories/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(data),
+    }
+  );
+
+  if (!response.ok) {
+    return { error: response.statusText };
+  }
+
+  return response.json();
+};
+
 export const editProduct = async ({ id, ...data }) => {
   const response = await fetch(
     `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/products/${id}`,

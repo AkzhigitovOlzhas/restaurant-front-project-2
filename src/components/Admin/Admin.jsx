@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Container, ListGroup, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { ToastContainer, Zoom } from "react-toastify";
 import { AdminPanel } from "./AdminPanel/AdminPanel";
 export const Admin = () => {
   function isAdmin() {
@@ -18,6 +19,18 @@ export const Admin = () => {
     <>
       {isAdmin() ? (
         <Container style={{ marginTop: "20px" }}>
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            transition={Zoom}
+          />
           <Row>
             <Col lg={2} md={3} xs={12} className="mb-md-0 mb-3">
               <p className="fs-3">Админ панель</p>

@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import Loader from "react-loader-spinner";
 import { useMutation, useQueryClient } from "react-query";
+import { toast } from "react-toastify";
 import { removeCategory } from "../../../api";
 
 export const CategoryDeleteModal = ({ id, name, show, handleClose }) => {
@@ -10,6 +11,15 @@ export const CategoryDeleteModal = ({ id, name, show, handleClose }) => {
   const remove = async () => {
     await mutateAsync(id);
     queryClient.invalidateQueries("categoriesAdmin");
+    toast.info("Категория удалена", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   return (

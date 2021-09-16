@@ -1,15 +1,22 @@
 import { Formik } from "formik";
 import React from "react";
-import { Alert, Button, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import Loader from "react-loader-spinner";
 
-export const AddCategoryForm = ({ onFormSubmit, isNotError, isLoading }) => {
+export const AddCategoryForm = ({ onFormSubmit, isLoading, initVal }) => {
+  function init() {
+    if (initVal) {
+      return { name: initVal };
+    }
+    return {
+      name: "",
+    };
+  }
+
   return (
     <>
       <Formik
-        initialValues={{
-          name: "",
-        }}
+        initialValues={init()}
         validate={(values) => {
           const errors = {};
           if (!values.name) {
@@ -18,20 +25,19 @@ export const AddCategoryForm = ({ onFormSubmit, isNotError, isLoading }) => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
           onFormSubmit(values);
           setSubmitting(false);
         }}
       >
-        {({ errors, handleChange, handleSubmit }) => (
-          <Form onSubmit={handleSubmit} className="p-2 bg-white my-4">
-            <div className="fs-3 mb-2">Добавить категорию</div>
+        {({ errors, values, handleChange, handleSubmit }) => (
+          <Form onSubmit={handleSubmit} className="p-2 bg-white">
             <Form.Floating>
               <Form.Control
                 name="name"
                 type="text"
                 onChange={handleChange}
                 placeholder=""
+                value={values.name}
               />
               <label>
                 {errors.name ? (
@@ -48,11 +54,6 @@ export const AddCategoryForm = ({ onFormSubmit, isNotError, isLoading }) => {
                 "Отправить"
               )}
             </Button>
-            {isNotError ? (
-              <Alert variant="success" className="mt-2 mb-0">
-                Категория успешно добавлена
-              </Alert>
-            ) : null}
           </Form>
         )}
       </Formik>

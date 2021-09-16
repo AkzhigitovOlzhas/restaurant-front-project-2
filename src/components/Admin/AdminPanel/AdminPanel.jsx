@@ -1,4 +1,4 @@
-import React from "react"; 
+import React from "react";
 import { useParams } from "react-router-dom";
 import {
   ActiveOrdersEditor,
@@ -32,9 +32,18 @@ export const AdminPanel = () => {
   if (page === "add-forms") {
     return (
       <>
-        <AddProductTab />
-        <AddCategoryTab />
-        <AddCrossSellsTab />
+        <div>
+          <div className="fs-3 mb-2 ms-1">Добавить товар</div>
+          <AddProductTab />
+        </div>
+        <div className="my-4">
+          <div className="fs-3 mb-2 ms-1">Добавить категорию</div>
+          <AddCategoryTab />
+        </div>
+        <div className="my-4">
+          <div className="fs-3 mb-2 ms-1">Добавить доп. продажи</div>
+          <AddCrossSellsTab />
+        </div>
       </>
     );
   }

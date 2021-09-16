@@ -1,17 +1,12 @@
 import React, { useState } from "react";
-import { Alert, Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
+import { Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { getAllCategoriesAdmin } from "../../../api";
 import { Formik } from "formik";
 import Loader from "react-loader-spinner";
-import { useRef } from "react";
+import { useRef } from "react"; 
 
-export const AddProductForm = ({
-  onFormSubmit,
-  isNotError,
-  isLoadingSubmit,
-  initVal,
-}) => {
+export const AddProductForm = ({ onFormSubmit, isLoadingSubmit, initVal }) => {
   const { data, isLoading } = useQuery(
     "categoriesAdmin",
     getAllCategoriesAdmin
@@ -90,9 +85,8 @@ export const AddProductForm = ({
         entries.forEach((entry) => {
           formData.append(entry[0], entry[1]);
         });
-        
-        formData.append("image", file);
-        console.log(values);
+
+        formData.append("image", file); 
         onFormSubmit(formData);
         setSubmitting(false);
       }}
@@ -106,7 +100,6 @@ export const AddProductForm = ({
         isSubmitting,
       }) => (
         <Form onSubmit={handleSubmit} className="p-2 bg-white">
-          <div className="fs-3 mb-2">Добавить товар</div>
           <Row>
             <Col sm={6} xs={12} className="mb-3">
               <Form.Floating>
@@ -297,11 +290,6 @@ export const AddProductForm = ({
               "Отправить"
             )}
           </Button>
-          {isNotError ? (
-            <Alert variant="success" className="mt-2 mb-0">
-              Категория успешно добавлена
-            </Alert>
-          ) : null}
         </Form>
       )}
     </Formik>

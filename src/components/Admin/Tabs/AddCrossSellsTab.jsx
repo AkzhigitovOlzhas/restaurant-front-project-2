@@ -1,29 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { useMutation } from "react-query";
+import { toast } from "react-toastify";
 import { AddCrossSells } from "../../../api";
 import { CrossSellsForm } from "../AdminForms";
 
 export const AddCrossSellsTab = () => {
   const { mutateAsync, isLoading } = useMutation(AddCrossSells);
-  const [isNotError, setIsNotError] = useState(false);
 
   const onFormSubmit = async (data) => {
-    const response = await mutateAsync(data);
-
-    if (response.error) {
-      setIsNotError(false);
-    } else {
-      setIsNotError(true);
-    }
-
-    console.log(response);
+    await mutateAsync(data);
+    toast.info("Доп. товар успено добавлен", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
-  return (
-    <CrossSellsForm
-      onFormSubmit={onFormSubmit}
-      isNotError={isNotError}
-      isLoading={isLoading}
-    />
-  );
+  return <CrossSellsForm onFormSubmit={onFormSubmit} isLoading={isLoading} />;
 };
