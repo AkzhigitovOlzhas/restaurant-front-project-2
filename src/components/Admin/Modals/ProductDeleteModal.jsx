@@ -10,7 +10,7 @@ export const ProductDeleteModal = ({ id, name, show, handleClose }) => {
   const { mutateAsync, isLoading } = useMutation(removeProduct);
   const remove = async () => {
     await mutateAsync(id);
-    queryClient.invalidateQueries("products");
+    queryClient.invalidateQueries("productsAdmin");
     toast.info("Товар удален", {
       position: "top-right",
       autoClose: 3000,

@@ -1,24 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal } from "react-bootstrap";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { toast } from "react-toastify";
 import { editProduct, getProductAdmin } from "../../../api";
 import { AddProductForm } from "../AdminForms";
 
 export const ProductEditModal = ({ id, show, handleClose }) => {
+  const queryClient = useQueryClient();
   const { data, isLoading } = useQuery(
     ["productAdmin", { id }],
     getProductAdmin
   );
   const { mutateAsync, isLoading: isMutating } = useMutation(editProduct);
-  const [isNotError, setIsNotError] = useState(false);
 
   const onFormSubmit = async (data) => {
-    const response = await mutateAsync({ ...data, id });
-    if (response.error) {
-      setIsNotError(false);
-    } else {
-      setIsNotError(true);
-    }
+    await mutateAsync({ data, id });
+    queryClient.invalidateQueries("productsAdmin");
+    handleClose();
+    toast.info("Товар успешно изменен!", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   return (
@@ -31,7 +38,6 @@ export const ProductEditModal = ({ id, show, handleClose }) => {
           <>
             <AddProductForm
               onFormSubmit={onFormSubmit}
-              isNotError={isNotError}
               isLoadingSubmit={isMutating}
               initVal={data}
             />

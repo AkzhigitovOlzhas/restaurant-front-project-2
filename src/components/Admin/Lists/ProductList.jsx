@@ -6,7 +6,7 @@ import { getAllProductsAdmin } from "../../../api";
 import { ProductCard } from "../Cards";
 
 export const ProductList = () => {
-  const { data, isLoading } = useQuery("products", getAllProductsAdmin);
+  const { data, isLoading } = useQuery("productsAdmin", getAllProductsAdmin);
   if (isLoading) {
     return (
       <div className="w-100 d-flex justify-content-center">

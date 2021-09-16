@@ -11,7 +11,7 @@ export const OrderPage = () => {
     await mutateAsync(data);
     toast.info("Заказ успешно оформлен, с вами свяжутся в ближайшее время", {
       position: "top-right",
-      autoClose: 3000,
+      autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,

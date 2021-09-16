@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { getAllCategoriesAdmin } from "../../../api";
 import { Formik } from "formik";
 import Loader from "react-loader-spinner";
-import { useRef } from "react"; 
+import { useRef } from "react";
 
 export const AddProductForm = ({ onFormSubmit, isLoadingSubmit, initVal }) => {
   const { data, isLoading } = useQuery(
@@ -37,7 +37,7 @@ export const AddProductForm = ({ onFormSubmit, isLoadingSubmit, initVal }) => {
       values = { ...initVal, category_id: initVal.category.id };
       delete values.category;
     }
-
+ 
     return values;
   }
 
@@ -86,7 +86,7 @@ export const AddProductForm = ({ onFormSubmit, isLoadingSubmit, initVal }) => {
           formData.append(entry[0], entry[1]);
         });
 
-        formData.append("image", file); 
+        formData.append("image", file);
         onFormSubmit(formData);
         setSubmitting(false);
       }}

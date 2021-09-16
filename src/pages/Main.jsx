@@ -7,7 +7,9 @@ export const Main = () => {
     <>
       <div
         className="d-flex flex-column bg-white "
-        style={{ minHeight: "100vh" }}
+        style={{
+          minHeight: "100vh",
+        }}
       >
         <div style={{ flex: "1 0 auto" }}>
           <Header />

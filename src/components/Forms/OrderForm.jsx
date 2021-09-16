@@ -234,7 +234,7 @@ export const OrderForm = ({ onFormSubmit, isLoading }) => {
                   </Row>
                 </Col>
                 <Col>
-                  <div className="fs-4 ">Lorem ipsum dolor sit amet.</div>
+                  <div className="fs-4 ">Информация о доставке</div>
                   <div className="text-secondary">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Nisi totam ipsum iste sunt! Reiciendis obcaecati

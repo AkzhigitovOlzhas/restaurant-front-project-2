@@ -482,7 +482,8 @@ export const editCategoty = async ({ id, data }) => {
   return response.json();
 };
 
-export const editProduct = async ({ id, ...data }) => {
+export const editProduct = async ({ id, data }) => {
+  console.log(data);
   const response = await fetch(
     `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/products/${id}`,
     {
