@@ -37,7 +37,7 @@ export const AddProductForm = ({ onFormSubmit, isLoadingSubmit, initVal }) => {
       values = { ...initVal, category_id: initVal.category.id };
       delete values.category;
     }
- 
+
     return values;
   }
 
@@ -72,11 +72,19 @@ export const AddProductForm = ({ onFormSubmit, isLoadingSubmit, initVal }) => {
     return null;
   }
 
+  if (data.length === 0) {
+    return (
+      <div className="bg-white p-3 fs-5">
+        Чтобы создать товар, создайте категорию.
+      </div>
+    );
+  }
+
   return (
     <Formik
       initialValues={init()}
       validate={validate}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values, { setSubmitting, resetForm }) => {
         let formData = new FormData();
         let entries = Object.entries(values).filter(
           (entry) => entry[0] !== "image"
@@ -88,6 +96,7 @@ export const AddProductForm = ({ onFormSubmit, isLoadingSubmit, initVal }) => {
 
         formData.append("image", file);
         onFormSubmit(formData);
+        resetForm(init());
         setSubmitting(false);
       }}
     >

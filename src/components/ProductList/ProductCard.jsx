@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Col, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { HiOutlineInformationCircle } from "react-icons/hi";
+import { API_URL } from "../../api/API_URL";
 import { ProductModal } from "./ProductModal";
 
 export const ProductCard = ({ data }) => {
@@ -18,7 +19,7 @@ export const ProductCard = ({ data }) => {
         <div className="shadow  rounded d-flex flex-column align-items-center w-100  bg-white justify-content-between">
           <div style={{ width: "100%" }}>
             <img
-              src={`http://willdimr.beget.tech/restaurant1/storage/app/${data.image}`}
+              src={`${API_URL}/storage/app/${data.image}`}
               alt=""
               style={{
                 maxWidth: "100%",

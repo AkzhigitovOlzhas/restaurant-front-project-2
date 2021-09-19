@@ -1,22 +1,55 @@
 import { Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Loader from "react-loader-spinner";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { cartActions } from "../../store/cart/actions";
+import { YMaps, withYMaps } from "react-yandex-maps";
+
+function MapSuggestComponent(props) {
+  const { ymaps } = props;
+  React.useEffect(() => {
+    const suggestView = new ymaps.SuggestView("suggest");
+    suggestView.events.add("select", (e) => {
+      props.setAddress(e.get("item").value);
+    }); // eslint-disable-next-line
+  }, [ymaps.SuggestView]);
+  return (
+    <Form.Floating className="mb-3">
+      <Form.Control
+        type="text"
+        placeholder="address"
+        onChange={(event) => props.setAddress(event.target.value)}
+        id="suggest"
+        required
+      />
+      <label>Адресс доставки</label>
+    </Form.Floating>
+  );
+}
 
 export const OrderForm = ({ onFormSubmit, isLoading }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const [addressInput, setAddressInput] = useState("");
+
+  const SuggestComponent = React.useMemo(() => {
+    return withYMaps(MapSuggestComponent, true, [
+      "SuggestView",
+      "geocode",
+      "coordSystem.geo",
+    ]);
+  }, []);
 
   function init() {
     let userData = JSON.parse(localStorage.getItem("user"));
     let initValues = {
       name: "",
       surname: "",
+      home: "",
+      appartament: "",
       phone: "",
-      address: "",
       comment: "",
     };
 
@@ -37,9 +70,9 @@ export const OrderForm = ({ onFormSubmit, isLoading }) => {
     } else {
       let order = {
         ...userData,
+        address: addressInput,
         total: localStorage.getItem("total"),
       };
-
       if (localStorage.getItem("user")) {
         order.user_id = JSON.parse(localStorage.getItem("user")).id;
       }
@@ -72,6 +105,12 @@ export const OrderForm = ({ onFormSubmit, isLoading }) => {
     if (!values.surname) {
       errors.surname = "Введите фамилию";
     }
+    if (!values.home) {
+      errors.home = "Введите дом";
+    }
+    if (!values.appartament) {
+      errors.appartament = "Введите квартиру";
+    }
     if (!values.phone) {
       errors.phone = "Введите номер телефона";
     } else if (
@@ -79,10 +118,6 @@ export const OrderForm = ({ onFormSubmit, isLoading }) => {
       values.phone.length < 7
     ) {
       errors.phone = "Введите корректный номер!";
-    }
-
-    if (!values.address) {
-      errors.address = "Введите адрес";
     }
 
     return errors;
@@ -94,7 +129,12 @@ export const OrderForm = ({ onFormSubmit, isLoading }) => {
       validate={validate}
       onSubmit={(values, { setSubmitting }) => {
         let order = createOrder(values);
-
+        console.log(order);
+        order.address =
+          order.address +
+          ` [Дом: ${values.home}, Квартира №${values.appartament}]`;
+        delete order.home;
+        delete order.appartament;
         onFormSubmit(order);
         dispatch(cartActions.setCart([]));
         dispatch(cartActions.setCountCart(0));
@@ -181,20 +221,53 @@ export const OrderForm = ({ onFormSubmit, isLoading }) => {
                   </Row>
                   <Row>
                     <Col>
+                      <YMaps
+                        enterprise
+                        query={{
+                          apikey: "4e73e034-4374-4e99-891e-799792ce98fc",
+                        }}
+                      >
+                        <SuggestComponent
+                          setAddress={(address) => setAddressInput(address)}
+                        />
+                      </YMaps>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
                       <Form.Floating className="mb-3">
                         <Form.Control
                           type="text"
-                          placeholder="address"
-                          name="address"
+                          placeholder="home"
+                          name="home"
+                          value={values.home}
                           onChange={handleChange}
                         />
                         <label>
-                          {errors.address && touched.address ? (
+                          {errors.home && touched.home ? (
+                            <span className="text-danger">{errors.home}</span>
+                          ) : (
+                            "Дом"
+                          )}
+                        </label>
+                      </Form.Floating>
+                    </Col>
+                    <Col>
+                      <Form.Floating className="mb-3">
+                        <Form.Control
+                          type="number"
+                          placeholder="appartament"
+                          name="appartament"
+                          value={values.appartament}
+                          onChange={handleChange}
+                        />
+                        <label>
+                          {errors.appartament && touched.appartament ? (
                             <span className="text-danger">
-                              {errors.address}
+                              {errors.appartament}
                             </span>
                           ) : (
-                            "Адресс доставки"
+                            "Квартира"
                           )}
                         </label>
                       </Form.Floating>

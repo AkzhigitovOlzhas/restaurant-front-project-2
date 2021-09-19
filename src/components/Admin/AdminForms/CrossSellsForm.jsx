@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik } from "formik";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import Loader from "react-loader-spinner"; 
+import Loader from "react-loader-spinner";
 
 export const CrossSellsForm = ({ onFormSubmit, isLoading }) => {
   return (
@@ -21,9 +21,13 @@ export const CrossSellsForm = ({ onFormSubmit, isLoading }) => {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting, resetForm }) => {
           onFormSubmit(values);
           setSubmitting(false);
+          resetForm({
+            name: "",
+            price: "",
+          });
         }}
       >
         {({ errors, handleChange, handleSubmit }) => (

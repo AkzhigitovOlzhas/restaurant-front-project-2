@@ -1,5 +1,6 @@
 import React from "react";
 import { Accordion, Container } from "react-bootstrap";
+import Loader from "react-loader-spinner";
 import { useQuery } from "react-query";
 import { getAllUserOrders } from "../api";
 import { Footer, Header, OrderCard } from "../components";
@@ -9,7 +10,11 @@ export const User = () => {
   const userData = JSON.parse(localStorage.getItem("user"));
 
   if (isLoading) {
-    return null;
+    return (
+      <div className="w-100 d-flex justify-content-center">
+        <Loader type="Bars" color="black" height={80} width={80} />
+      </div>
+    );
   }
 
   return (
@@ -31,13 +36,17 @@ export const User = () => {
             <div>У вас нет доступа к этой страницу</div>
           )}
           <div className="my-3">
-            <div className="display-5 mb-3">Исторя заказов</div>
+            <div className="display-5 mb-3">История заказов</div>
 
-            <Accordion>
-              {data.map((order) => (
-                <OrderCard order={order} key={order.id} />
-              ))}
-            </Accordion>
+            {data.length === 0 ? (
+              <div className="fs-5">Пока что исторя заказов пуста.</div>
+            ) : (
+              <Accordion>
+                {data.map((order) => (
+                  <OrderCard order={order} key={order.id} />
+                ))}
+              </Accordion>
+            )}
           </div>
         </Container>
       </div>

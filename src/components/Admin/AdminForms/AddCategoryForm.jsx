@@ -2,8 +2,10 @@ import { Formik } from "formik";
 import React from "react";
 import { Button, Form } from "react-bootstrap";
 import Loader from "react-loader-spinner";
+import { useQueryClient } from "react-query";
 
 export const AddCategoryForm = ({ onFormSubmit, isLoading, initVal }) => {
+  const queryClient = useQueryClient();
   function init() {
     if (initVal) {
       return { name: initVal };
@@ -24,9 +26,11 @@ export const AddCategoryForm = ({ onFormSubmit, isLoading, initVal }) => {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting, resetForm }) => {
+          queryClient.invalidateQueries("categoriesAdmin");
           onFormSubmit(values);
           setSubmitting(false);
+          resetForm(init());
         }}
       >
         {({ errors, values, handleChange, handleSubmit }) => (

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Button, Col } from "react-bootstrap";
+import { API_URL } from "../../../api/API_URL";
 import { ProductDeleteModal, ProductEditModal } from "../Modals";
 
 export const ProductCard = ({ data, id }) => {
@@ -17,7 +18,7 @@ export const ProductCard = ({ data, id }) => {
     >
       <div className="shadow  rounded d-flex flex-column align-items-center w-100 p-2 bg-white justify-content-between">
         <img
-          src={`http://willdimr.beget.tech/restaurant1/storage/app/${data.image}`}
+          src={`${API_URL}/storage/app/${data.image}`}
           alt=""
           style={{ maxWidth: "100%" }}
         />

@@ -3,7 +3,6 @@ import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 import { addOrder } from "../api";
 import { Footer, Header, OrderForm } from "../components";
-
 export const OrderPage = () => {
   const { mutateAsync, isLoading } = useMutation(addOrder);
 

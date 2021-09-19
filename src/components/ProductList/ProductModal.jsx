@@ -14,6 +14,7 @@ import Loader from "react-loader-spinner";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cart/actions";
 import { toast } from "react-toastify";
+import { API_URL } from "../../api/API_URL";
 
 export const ProductModal = ({ show, onHide, id }) => {
   const { data, isLoading } = useQuery(["products", { id }], getProductCard);
@@ -181,7 +182,7 @@ export const ProductModal = ({ show, onHide, id }) => {
                 style={{ marginTop: "5px", marginBottom: "10px" }}
               >
                 <img
-                  src={`http://willdimr.beget.tech/restaurant1/storage/app/${data.image}`}
+                  src={`${API_URL}/storage/app/${data.image}`}
                   alt=""
                   className="product-modal-img"
                 />

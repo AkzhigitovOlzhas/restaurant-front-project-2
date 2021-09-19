@@ -1,7 +1,6 @@
+import { API_URL } from "./API_URL";
 export const getAllCategories = async () => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/categories`
-  );
+  const response = await fetch(`${API_URL}/public/api/categories`);
 
   if (!response.ok) {
     throw new Error("Something went wrong.");
@@ -10,9 +9,7 @@ export const getAllCategories = async () => {
   return response.json();
 };
 export const getCrossSells = async () => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/cross_sells`
-  );
+  const response = await fetch(`${API_URL}/public/api/cross_sells`);
 
   if (!response.ok) {
     throw new Error("Something went wrong.");
@@ -22,15 +19,12 @@ export const getCrossSells = async () => {
 };
 
 export const getAllProductsAdmin = async () => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/products`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/admin/products`, {
+    method: "GET",
+    headers: {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
   if (!response.ok) {
     return response.json();
@@ -40,15 +34,12 @@ export const getAllProductsAdmin = async () => {
 };
 
 export const removeProduct = async (id) => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/products/${id}`,
-    {
-      method: "DELETE",
-      headers: {
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/admin/products/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+  });
   if (!response.ok) {
     throw new Error(response.json().message);
   }
@@ -61,9 +52,7 @@ export const getAllCards = async ({ queryKey }) => {
   /*eslint-disable no-unused-vars*/
   const [_key, { category }] = queryKey;
 
-  response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/categories/${category}`
-  );
+  response = await fetch(`${API_URL}/public/api/categories/${category}`);
 
   if (!response.ok) {
     throw new Error("Something went wrong.");
@@ -77,9 +66,7 @@ export const getProductCard = async ({ queryKey }) => {
   /*eslint-disable no-unused-vars*/
   const [_key, { id }] = queryKey;
 
-  response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/products/${id}`
-  );
+  response = await fetch(`${API_URL}/public/api/products/${id}`);
 
   if (!response.ok) {
     throw new Error("Something went wrong.");
@@ -89,15 +76,12 @@ export const getProductCard = async ({ queryKey }) => {
 };
 
 export const getAllCrossSellsAdmin = async () => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/cross_sells`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/admin/cross_sells`, {
+    method: "GET",
+    headers: {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
   if (!response.ok) {
     return response.json();
@@ -107,15 +91,12 @@ export const getAllCrossSellsAdmin = async () => {
 };
 
 export const removeCrossSell = async (id) => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/cross_sells/${id}`,
-    {
-      method: "DELETE",
-      headers: {
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/admin/cross_sells/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+  });
   if (!response.ok) {
     return { error: response.text };
   }
@@ -128,15 +109,12 @@ export const getProductAdmin = async ({ queryKey }) => {
   /*eslint-disable no-unused-vars*/
   const [_key, { id }] = queryKey;
 
-  response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/products/${id}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  );
+  response = await fetch(`${API_URL}/public/api/auth/admin/products/${id}`, {
+    method: "GET",
+    headers: {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
   if (!response.ok) {
     throw new Error("Something went wrong.");
@@ -146,15 +124,12 @@ export const getProductAdmin = async ({ queryKey }) => {
 };
 
 export const getAllReviews = async () => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/comments`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/admin/comments`, {
+    method: "GET",
+    headers: {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
   if (!response.ok) {
     return response.json();
@@ -164,15 +139,12 @@ export const getAllReviews = async () => {
 };
 
 export const removeReview = async (id) => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/comments/${id}`,
-    {
-      method: "DELETE",
-      headers: {
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/admin/comments/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+  });
   if (!response.ok) {
     return { error: response.text };
   }
@@ -181,15 +153,12 @@ export const removeReview = async (id) => {
 };
 
 export const getAllCategoriesAdmin = async () => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/categories`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/admin/categories`, {
+    method: "GET",
+    headers: {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
   if (!response.ok) {
     return response.json();
@@ -199,15 +168,12 @@ export const getAllCategoriesAdmin = async () => {
 };
 
 export const getAllUserOrders = async () => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/orders`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/orders`, {
+    method: "GET",
+    headers: {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
   if (!response.ok) {
     return response.json();
@@ -221,15 +187,12 @@ export const getActiveOrder = async ({ queryKey }) => {
   if (queryKey[1] === null) {
     return null;
   }
-  response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/orders/${queryKey[1]}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  );
+  response = await fetch(`${API_URL}/public/api/auth/admin/orders/${queryKey[1]}`, {
+    method: "GET",
+    headers: {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
   if (!response.ok) {
     return { error: "error" };
@@ -239,15 +202,12 @@ export const getActiveOrder = async ({ queryKey }) => {
 };
 
 export const getAllActiveOrders = async () => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/active_orders`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/admin/active_orders`, {
+    method: "GET",
+    headers: {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
   if (!response.ok) {
     return response.json();
@@ -257,15 +217,12 @@ export const getAllActiveOrders = async () => {
 };
 
 export const getAllClosedOrders = async () => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/execute_orders`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/admin/execute_orders`, {
+    method: "GET",
+    headers: {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
   if (!response.ok) {
     return response.json();
@@ -275,15 +232,12 @@ export const getAllClosedOrders = async () => {
 };
 
 export const removeClosedOrder = async (id) => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/orders/${id}`,
-    {
-      method: "DELETE",
-      headers: {
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/admin/orders/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+  });
   if (!response.ok) {
     return { error: response.text };
   }
@@ -292,15 +246,12 @@ export const removeClosedOrder = async (id) => {
 };
 
 export const removeCategory = async (id) => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/categories/${id}`,
-    {
-      method: "DELETE",
-      headers: {
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/admin/categories/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+  });
   if (!response.ok) {
     return { error: response.text };
   }
@@ -309,16 +260,13 @@ export const removeCategory = async (id) => {
 };
 
 export const signIn = async (data) => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/login`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
 
   if (!response.ok) {
     return response.json();
@@ -328,16 +276,13 @@ export const signIn = async (data) => {
 };
 
 export const signUp = async (data) => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/register`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
 
   if (!response.ok) {
     return { error: true };
@@ -347,16 +292,13 @@ export const signUp = async (data) => {
 };
 
 export const addReview = async (data) => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/comments`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/comments`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
 
   if (!response.ok) {
     return { error: true };
@@ -366,16 +308,13 @@ export const addReview = async (data) => {
 };
 
 export const addOrder = async (data) => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/orders`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/orders`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
 
   if (!response.ok) {
     return { error: true };
@@ -385,17 +324,14 @@ export const addOrder = async (data) => {
 };
 
 export const addCategory = async (data) => {
-  const response = await fetch(
-    "http://willdimr.beget.tech/restaurant1/public/api/auth/admin/categories",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(data),
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/admin/categories`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(data),
+  });
 
   if (!response.ok) {
     return { error: response.statusText };
@@ -405,17 +341,14 @@ export const addCategory = async (data) => {
 };
 
 export const AddCrossSells = async (data) => {
-  const response = await fetch(
-    "http://willdimr.beget.tech/restaurant1/public/api/auth/admin/cross_sells",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(data),
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/admin/cross_sells`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(data),
+  });
 
   if (!response.ok) {
     return { error: response.statusText };
@@ -425,16 +358,13 @@ export const AddCrossSells = async (data) => {
 };
 
 export const addProduct = async (data) => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/products`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-      body: data,
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/admin/products`, {
+    method: "POST",
+    headers: {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+    body: data,
+  });
 
   if (!response.ok) {
     return { error: response.statusText };
@@ -444,16 +374,13 @@ export const addProduct = async (data) => {
 };
 
 export const closeOrder = async ({ id }) => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/orders/${id}`,
-    {
-      method: "PUT",
-      headers: {
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-      body: null,
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/admin/orders/${id}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+    body: null,
+  });
 
   if (!response.ok) {
     return { error: response.statusText };
@@ -463,17 +390,14 @@ export const closeOrder = async ({ id }) => {
 };
 
 export const editCategoty = async ({ id, data }) => {
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/categories/${id}`,
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(data),
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/admin/categories/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(data),
+  });
 
   if (!response.ok) {
     return { error: response.statusText };
@@ -484,16 +408,13 @@ export const editCategoty = async ({ id, data }) => {
 
 export const editProduct = async ({ id, data }) => {
   console.log(data);
-  const response = await fetch(
-    `http://willdimr.beget.tech/restaurant1/public/api/auth/admin/products/${id}`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `bearer ${localStorage.getItem("token")}`,
-      },
-      body: data,
-    }
-  );
+  const response = await fetch(`${API_URL}/public/api/auth/admin/products/${id}`, {
+    method: "POST",
+    headers: {
+      Authorization: `bearer ${localStorage.getItem("token")}`,
+    },
+    body: data,
+  });
 
   if (!response.ok) {
     return { error: response.statusText };
